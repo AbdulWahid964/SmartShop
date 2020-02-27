@@ -19,6 +19,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.ui.Model;
 
+/**
+ * @author mahendra sukula
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class HomeControllerTest {
 

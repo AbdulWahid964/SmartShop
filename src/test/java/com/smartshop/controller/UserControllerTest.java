@@ -20,6 +20,10 @@ import com.smartshop.entity.Users;
 import com.smartshop.service.UserService;
 import com.smartshop.service.UserServiceImpl;
 
+/**
+ * @author mahendra sukula
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
