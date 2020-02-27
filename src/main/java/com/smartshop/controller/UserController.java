@@ -44,8 +44,7 @@ public class UserController {
 		}
 		users.setEnabled(1);
 		users.setEncodedPassword(passwordEncoder.encode(users.getPassword()));
-	//	Roles role = new Roles("user");
-		Roles role = new Roles("manager");
+		Roles role = new Roles("user");
 		users.setRole(role);
 		userService.saveUser(users);
 		role=null;

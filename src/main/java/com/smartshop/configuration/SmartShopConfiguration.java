@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.smartshop.controller.UserController;
+import com.smartshop.exception.ResourceNotFoundException;
 
 @Configuration
 @ComponentScan(basePackages={"com.smartshop.controller","com.smartshop.service"})
@@ -26,7 +27,6 @@ import com.smartshop.controller.UserController;
 @EntityScan(basePackages="com.smartshop.entity")
 @EnableWebSecurity
 public class SmartShopConfiguration extends WebSecurityConfigurerAdapter{
-
 	
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 	
@@ -43,9 +43,7 @@ public class SmartShopConfiguration extends WebSecurityConfigurerAdapter{
 		passwordEncoder(passwordEncoder()).
 		usersByUsernameQuery("select manager_name,encoded_password,enabled from user_registration where manager_name=?").
 		authoritiesByUsernameQuery("select u.manager_name as username, r.roles as role from user_registration u INNER JOIN roles r ON r.role_id = u.role_role_id where manager_name=?");
-	
 	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	
@@ -67,6 +65,7 @@ public class SmartShopConfiguration extends WebSecurityConfigurerAdapter{
 			.permitAll();
 		}
 		catch (Exception e) {
+			throw new ResourceNotFoundException("Exception Caught in the Spring Security Method : configure(HttpSecurity Method)");
 		}
 		http.csrf().disable();
 	}
