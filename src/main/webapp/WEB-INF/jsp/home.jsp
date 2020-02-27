@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-   <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>  
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -33,70 +34,105 @@
 </style>
 </head>
 <body>
-
-<h1>Home Page</h1>
-<c:if test="${role eq '[admin]'}">
-<a href="addBooks">Add Books</a>
- <a href="showBooks">Show Books</a><br/>
-  <a href="payment">Payment</a><br/>
-</c:if>
-<div>
-<c:if test="${role eq '[user]'}">
-<center>
-<h2>Books Search</h2>€‹
-<form  action="/find">€‹
-<input type="text" name="bookname" class="form-control" placeholder="Search the products"/>€‹
-<button type="submit" value="save">Search</button>€‹
-</form>€‹
-<br/>€‹
-<br/>
-
-		<h2>Books Details</h2>
-		<br /> <br />
-		<table class="table">
-			<tr>
-				<th width="80">Book-Id</th>
-				<th width="80">Book-Name</th>
-				<th width="80">Author-Name</th>
-				<th width="80">Price</th>
-				<th width="80">Quantity</th>
-				<th width="80">Description</th>
-				<th width="80">Add To Cart</th>
-			</tr>
-			<c:if test="${list.size() eq 0}">
-			<tr>
-					<td colspan=6>No Data to be display</td>
-			</c:if>
-			<c:forEach var="listbooks" items="${list}">
+	<h1>Home Page</h1>
+	<c:if test="${role eq '[manager]'}">
+		<center>
+			€‹ <br />€‹ <br />
+			<h2>Product Details</h2>
+			<br /> <br />
+			<table class="table">
 				<tr>
-					<td>${listbooks.bookID}</td>
-					<td>${listbooks.bookName}</td>
-					<td>${listbooks.authorName}</td>
-					<td>${listbooks.price}</td>
-					<td>${listbooks.quantity}</td>
-					<td>${listbooks.description}</td>
-					<td><a href="<c:url value='viewcart/${listbooks.bookID}' />">Add To Cart</a></td>
-					<%-- <td><a href="<c:url value='/cart/${listbooks.bookID}' />">Add To Cart</a></td> --%>
+					<th width="80">Product-Id</th>
+					<th width="80">Product-Name</th>
+					<th width="80">Price</th>
+					<th width="80">Quantity</th>
+					<th width="80">Description</th>
+					<th width="80">Edit</th>
+					<th width="80">Delete</th>
 				</tr>
-			</c:forEach>
-			
-		</table>
-		<br/>
-		<a href="${pageContext.request.contextPath}/home"> Back</a>
-		<a href="<c:url value='viewcart/0' />">Go To Cart</a>
-	</center>
+				<c:if test="${list.size() eq 0}">
+					<tr>
+						<td colspan=7>No Product to be displayed</td>
+				</c:if>
+				<c:forEach var="listproducts" items="${list}">
+					<tr>
+						<td>${listproducts.productId}</td>
+						<td>${listproducts.productName}</td>
+						<td>${listproducts.productPrice}</td>
+						<td>${listproducts.quantity}</td>
+						<td>${listproducts.description}</td>
+						<td><a
+							href="<c:url value='/edit/${listproducts.productId}' />">Edit</a></td>
+						<td><a
+							href="<c:url value='/remove/${listproducts.productId}' />">Delete</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<br /> <a href="/addproduct">Add Product</a>
+		</center>
 	</c:if>
-</div>
 
 
-<br>
-<br>
-<div>
-Welcome Back <sec:authentication property="name"/> 
+	<div>
+		<c:if test="${role eq '[user]'}">
+			<center>
+				<h2>Books Search</h2>
+				€‹
+				<form action="/find">
+					€‹ <input type="text" name="bookname" class="form-control"
+						placeholder="Search the products" />€‹
+					<button type="submit" value="save">Search</button>
+					€‹
+				</form>
+				€‹ <br />€‹ <br />
 
-<sec:authentication property="principal.authorities"/>
-<a href="logout">Logout</a></div>
+				<h2>Books Details</h2>
+				<br /> <br />
+				<table class="table">
+					<tr>
+						<th width="80">Book-Id</th>
+						<th width="80">Book-Name</th>
+						<th width="80">Author-Name</th>
+						<th width="80">Price</th>
+						<th width="80">Quantity</th>
+						<th width="80">Description</th>
+						<th width="80">Add To Cart</th>
+					</tr>
+					<c:if test="${list.size() eq 0}">
+						<tr>
+							<td colspan=6>No Data to be display</td>
+					</c:if>
+					<c:forEach var="listbooks" items="${list}">
+						<tr>
+							<td>${listbooks.bookID}</td>
+							<td>${listbooks.bookName}</td>
+							<td>${listbooks.authorName}</td>
+							<td>${listbooks.price}</td>
+							<td>${listbooks.quantity}</td>
+							<td>${listbooks.description}</td>
+							<td><a href="<c:url value='viewcart/${listbooks.bookID}' />">Add
+									To Cart</a></td>
+							<%-- <td><a href="<c:url value='/cart/${listbooks.bookID}' />">Add To Cart</a></td> --%>
+						</tr>
+					</c:forEach>
 
+				</table>
+				<br /> <a href="${pageContext.request.contextPath}/home"> Back</a>
+				<a href="<c:url value='viewcart/0' />">Go To Cart</a>
+			</center>
+		</c:if>
+	</div>
+
+
+	<br>
+	<br>
+	<div>
+		Welcome Back
+		<sec:authentication property="name" />
+
+		<sec:authentication property="principal.authorities" />
+		<a href="logout">Logout</a>
+	</div>
 
 </body>
 </html>
