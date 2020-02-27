@@ -1,5 +1,7 @@
 package com.smartshop.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -9,10 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class HomeController {
-
+	private static final Logger logger = LogManager.getLogger(HomeController.class);
 	
 	@RequestMapping("/home")
 	public ModelAndView showHome(Model model){
+		
+		logger.info("In Home Controller and setting roles");
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String role= auth.getAuthorities().toString();

@@ -1,5 +1,7 @@
 package com.smartshop.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
@@ -17,37 +19,36 @@ import com.smartshop.service.UserService;
 @RestController
 public class UserController {
 
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/showUserRegistration")
+	@RequestMapping("/registration")
 	public ModelAndView showUserRegisterForm(){
+		
+		logger.info("In Show Registration Method");
 		return new ModelAndView("registration-page","users",new Users());
 	}
-	@PostMapping("saveUserRegistrationForm")
+	@PostMapping("register")
 	public ModelAndView saveUserRegistrationForm(@Validated @ModelAttribute("users") Users users,BindingResult result){
 
+		logger.info("In Save Registration Method");
 
-		System.out.println("saveUserRegistration" );
-
-		//Roles roles= new Roles(users.getRole().getRoles());
-		//users.setRole(roles);
-		System.out.println("result.hasErrors()" +result.hasErrors());
 		if(result.hasErrors()){
+			logger.error("Validation Error Occured in Save Registration Method ");
 			return new ModelAndView("registration-page");
 		}
 		users.setEnabled(1);
 		users.setEncodedPassword(passwordEncoder.encode(users.getPassword()));
-		Roles role = new Roles("user");
-//		Roles role = new Roles("admin");
+	//	Roles role = new Roles("user");
+		Roles role = new Roles("manager");
 		users.setRole(role);
 		userService.saveUser(users);
-
+		role=null;
 		return new ModelAndView("redirect:/login");
-
-
 	}
 }

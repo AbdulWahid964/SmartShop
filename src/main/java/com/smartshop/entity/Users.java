@@ -25,13 +25,13 @@ public class Users {
 	@Column(name="id")
 	private int userId;
 	
-	@Column(name="user_name")
+	@Column(name="manager_name")
 	@NotNull
-	@NotEmpty(message="User Name should be Empty")
-	private String userName;
+	@NotEmpty(message="User Name should not be Empty")
+	private String managerName;
 	
 	@NotNull
-	@NotEmpty(message="Email Name should be Empty")
+	@NotEmpty(message="Email id should not be Empty")
 	@Email(message="Please Enter a Valid Email Id")
 	private String emailId;
 	
@@ -39,7 +39,7 @@ public class Users {
 	
 	private String address;
 	
-	@Pattern(regexp = "[0-9]{10}", message = "must conatins 10 digits only")
+	@Pattern(regexp = "[0-9]{10}", message = "Only numbers and followed by 10 digits only")
 	private String contactNumber;
 	
 	private int enabled;
@@ -79,12 +79,12 @@ public class Users {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getManagerName() {
+		return managerName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 
 	public String getEmailId() {

@@ -129,7 +129,7 @@
     <p> Password</p>
     <input type="password" name="password"  id="password" placeholder="Enter Password"><br>
     <input type="submit" value="Login">
-    <a href="showUserRegistration"> click here to register</a>
+    <a href="registration"> click here to register</a>
     </form:form>
     </div>
     <script src="js/jquery-2.1.4.min.js"></script>

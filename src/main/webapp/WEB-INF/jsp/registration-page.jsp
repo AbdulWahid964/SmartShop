@@ -23,15 +23,15 @@
   <h1 align="center">Registration Form</h1>
   <br/>
   
-  <form:form action="saveUserRegistrationForm" method="post" modelAttribute="users">
+  <form:form action="register" method="post" modelAttribute="users">
 <table >
     <tr>
     	<td><form:input path="userId" type="hidden" /></td>
     </tr>
      <tr>
-    	<td>User Name</td>
-    	<td><form:input path="userName"  cssClass="formInput" placeholder="Enter User Name"/></td>
-    	<td><form:errors path="userName"  cssClass="formError"/></td>
+    	<td>Manager Name</td>
+    	<td><form:input path="managerName"  cssClass="formInput" placeholder="Enter Manager Name"/></td>
+    	<td><form:errors path="managerName"  cssClass="formError"/></td>
     </tr>
      <tr>
     	<td>Email Id:</td>
