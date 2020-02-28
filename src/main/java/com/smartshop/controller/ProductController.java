@@ -1,7 +1,5 @@
 package com.smartshop.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.smartshop.entity.Product;
 import com.smartshop.exception.ResourceNotFoundException;
 import com.smartshop.service.ProductService;
@@ -41,8 +40,8 @@ public class ProductController {
 	public ModelAndView deleteProduct(@PathVariable("productId") int productId, Model model) {
 
 		productService.deleteProduct(productId);
-		 model.addAttribute("list", productService.showProducts());
-		    return new ModelAndView("home");
+		model.addAttribute("list", productService.showProducts());
+		return new ModelAndView("home");
 	}
 
 	@GetMapping("/edit/{productId}")
