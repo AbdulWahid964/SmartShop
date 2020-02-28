@@ -1,10 +1,13 @@
 package com.smartshop.controller;
 
+<<<<<<< HEAD
 import java.text.ParseException;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+=======
+>>>>>>> branch 'master' of https://github.com/AbdulWahid964/SmartShop.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,6 +67,7 @@ public class ProductController {
 	@GetMapping(value = "/remove/{productId}")
 	public ModelAndView deleteProduct(@PathVariable("productId") int productId, Model model) {
 
+<<<<<<< HEAD
 		try {
 			logger.info("In deleteProduct method");
 
@@ -77,6 +81,11 @@ public class ProductController {
 
 			throw new ProductIdNotFoundException("Invalid Product Id");
 		}
+=======
+		productService.deleteProduct(productId);
+		model.addAttribute("list", productService.showProducts());
+		return new ModelAndView("home");
+>>>>>>> branch 'master' of https://github.com/AbdulWahid964/SmartShop.git
 	}
 
 	@GetMapping("/edit/{productId}")
