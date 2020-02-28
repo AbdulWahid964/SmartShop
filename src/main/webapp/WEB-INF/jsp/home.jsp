@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Home</title>
 <style type="text/css">
 .table {
 	font-family: verdana, arial, sans-serif;
@@ -34,96 +34,80 @@
 </style>
 </head>
 <body>
-	<h1>Home Page</h1>
+
+	<h2>Product Details</h2>
+
+	<form action="search">
+		Product Name:<input id="productname" name="productname"
+			class="form-control" value="${product.productName}"
+			placeholder="Enter Product Name" /> <input type="submit"
+			value="Submit">
+		<!-- <input type="reset" value="Reset"> -->
+	</form>
+	<form action="home">
+		<button type="submit">Refresh</button>
+	</form>
+	<br>
+	<br>
+
+
 	<c:if test="${role eq '[manager]'}">
-		<center>
-			€‹ <br />€‹ <br />
-			<h2>Product Details</h2>
-			<br /> <br />
+		<table class="table">
+			<tr>
+				<th width="80">Product Id</th>
+				<th width="80">Product Name</th>
+				<th width="80">Price</th>
+				<th width="80">Quantity</th>
+				<th width="80">Description</th>
+				<th width="80">Edit</th>
+				<th width="80">Delete</th>
+			</tr>
+			<c:if test="${productList.size() eq 0}">
+				<tr>
+					<td colspan=7>No Product to be displayed</td>
+			</c:if>
+			<c:forEach var="product" items="${productList}">
+				<tr>
+					<td>${product.productId}</td>
+					<td>${product.productName}</td>
+					<td>${product.productPrice}</td>
+					<td>${product.quantity}</td>
+					<td>${product.description}</td>
+					<td><a href="<c:url value='/edit/${product.productId}' />">Edit</a></td>
+					<td><a href="<c:url value='/remove/${product.productId}'/>">Delete</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<br />
+		<a href="/product">Add Product</a>
+	</c:if>
+	<div>
+		<c:if test="${role eq '[user]'}">
 			<table class="table">
 				<tr>
-					<th width="80">Product-Id</th>
+					<th width="80">Product Id</th>
 					<th width="80">Product-Name</th>
 					<th width="80">Price</th>
 					<th width="80">Quantity</th>
 					<th width="80">Description</th>
-					<th width="80">Edit</th>
-					<th width="80">Delete</th>
 				</tr>
-				<c:if test="${list.size() eq 0}">
+				<c:if test="${productList.size() eq 0}">
 					<tr>
-						<td colspan=7>No Product to be displayed</td>
+						<td colspan=5>No Data to be display</td>
 				</c:if>
-				<c:forEach var="listproducts" items="${list}">
+				<c:forEach var="product" items="${productList}">
 					<tr>
-						<td>${listproducts.productId}</td>
-						<td>${listproducts.productName}</td>
-						<td>${listproducts.productPrice}</td>
-						<td>${listproducts.quantity}</td>
-						<td>${listproducts.description}</td>
-						<td><a
-							href="<c:url value='/edit/${listproducts.productId}' />">Edit</a></td>
-						<td><a
-							href="<c:url value='/remove/${listproducts.productId}' />">Delete</a></td>
+						<td>${product.productId}</td>
+						<td>${product.productName}</td>
+						<td>${product.productPrice}</td>
+						<td>${product.quantity}</td>
+						<td>${product.description}</td>
 					</tr>
 				</c:forEach>
 			</table>
-			<br /> <a href="/addproduct">Add Product</a>
-		</center>
-	</c:if>
-
-
-	<div>
-		<c:if test="${role eq '[user]'}">
-			<center>
-				<h2>Books Search</h2>
-				€‹
-				<form action="/find">
-					€‹ <input type="text" name="bookname" class="form-control"
-						placeholder="Search the products" />€‹
-					<button type="submit" value="save">Search</button>
-					€‹
-				</form>
-				€‹ <br />€‹ <br />
-
-				<h2>Books Details</h2>
-				<br /> <br />
-				<table class="table">
-					<tr>
-						<th width="80">Book-Id</th>
-						<th width="80">Book-Name</th>
-						<th width="80">Author-Name</th>
-						<th width="80">Price</th>
-						<th width="80">Quantity</th>
-						<th width="80">Description</th>
-						<th width="80">Add To Cart</th>
-					</tr>
-					<c:if test="${list.size() eq 0}">
-						<tr>
-							<td colspan=6>No Data to be display</td>
-					</c:if>
-					<c:forEach var="listbooks" items="${list}">
-						<tr>
-							<td>${listbooks.bookID}</td>
-							<td>${listbooks.bookName}</td>
-							<td>${listbooks.authorName}</td>
-							<td>${listbooks.price}</td>
-							<td>${listbooks.quantity}</td>
-							<td>${listbooks.description}</td>
-							<td><a href="<c:url value='viewcart/${listbooks.bookID}' />">Add
-									To Cart</a></td>
-							<%-- <td><a href="<c:url value='/cart/${listbooks.bookID}' />">Add To Cart</a></td> --%>
-						</tr>
-					</c:forEach>
-
-				</table>
-				<br /> <a href="${pageContext.request.contextPath}/home"> Back</a>
-				<a href="<c:url value='viewcart/0' />">Go To Cart</a>
-			</center>
+			<br />
 		</c:if>
 	</div>
-
-
 	<br>
 	<br>
 	<div>

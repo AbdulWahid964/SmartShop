@@ -12,26 +12,37 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.smartshop.service.ProductService;
 
+/**
+ * @author Abdul,Indu,varun
+ *
+ */
 @RestController
 public class HomeController {
 	private static final Logger logger = LogManager.getLogger(HomeController.class);
-	
+
 	@Autowired
 	ProductService productservice;
-	
-	
+
+	@RequestMapping("/")
+	public ModelAndView showLogin(Model model) {
+
+		logger.info("In showLogin Method");
+
+		return new ModelAndView("login");
+
+	}
+
 	@RequestMapping("/home")
-	public ModelAndView showHome(Model model){
-		
+	public ModelAndView showHome(Model model) {
+
 		logger.info("In Home Controller and setting roles");
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String role= auth.getAuthorities().toString();
-	    model.addAttribute("role",role);
-	    model.addAttribute("list", productservice.showProducts());
-	    return new ModelAndView("home");
-//		return new ModelAndView("/home", "list", list);
-	    
+		String role = auth.getAuthorities().toString();
+		model.addAttribute("role", role);
+		model.addAttribute("productList", productservice.showProducts());
+		return new ModelAndView("home");
+
 	}
 
 }

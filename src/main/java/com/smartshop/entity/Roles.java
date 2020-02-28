@@ -7,25 +7,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*Author Abdul Wahid*/
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
 public class Roles {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="role_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "role_id")
 	private int id;
-	
-	@Column(name="roles")
+
+	@Column(name = "roles")
 	private String roles;
 
 	public Roles(String roles) {
 		super();
 		this.roles = roles;
 	}
-public Roles() {
-	// TODO Auto-generated constructor stub
-}
+
+	public Roles() {
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -42,4 +44,3 @@ public Roles() {
 		this.roles = roles;
 	}
 }
-

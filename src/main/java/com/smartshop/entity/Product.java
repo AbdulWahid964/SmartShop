@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,10 +19,8 @@ public class Product {
 	@Size(min = 3, max = 20, message = "Product Name size should between 3 to 20")
 	private String productName;
 
-	@NotNull(message = "This is a required field")
-	private long productPrice;
+	private int productPrice;
 
-	@NotNull(message = "This is a required field")
 	private int quantity;
 
 	private String description;
@@ -44,11 +41,11 @@ public class Product {
 		this.productName = productName;
 	}
 
-	public long getProductPrice() {
+	public int getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(long productPrice) {
+	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
 

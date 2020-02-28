@@ -15,46 +15,44 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-
+/*Author Abdul Wahid*/
 @Entity
-@Table(name="user_registration")
+@Table(name = "user_registration")
 public class Users {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int userId;
-	
-	@Column(name="manager_name")
+
+	@Column(name = "manager_name")
 	@NotNull
-	@NotEmpty(message="User Name should not be Empty")
+	@NotEmpty(message = "User Name should not be Empty")
 	private String managerName;
-	
+
 	@NotNull
-	@NotEmpty(message="Email id should not be Empty")
-	@Email(message="Please Enter a Valid Email Id")
+	@NotEmpty(message = "Email id should not be Empty")
+	@Email(message = "Please Enter a Valid Email Id")
 	private String emailId;
-	
+
 	private String gender;
-	
+
 	private String address;
-	
+
 	@Pattern(regexp = "[0-9]{10}", message = "Only numbers and followed by 10 digits only")
 	private String contactNumber;
-	
+
 	private int enabled;
 
 	@Transient
-	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})",
-	message="Password should contain least one digit, one upper case letter, one lower case letter and one special symbol (@#$%)")
+	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})", message = "Password should contain least one digit, one upper case letter, one lower case letter and one special symbol (@#$%)")
 	private String password;
-	
+
 	private String encodedPassword;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Roles role;
-	
-	
+
 	public String getEncodedPassword() {
 		return encodedPassword;
 	}

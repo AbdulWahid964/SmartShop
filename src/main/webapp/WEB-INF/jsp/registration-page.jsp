@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registration</title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 .formError {
 	color: red;
@@ -19,47 +22,52 @@
 <body>
 
 
- <div class="container">
-  <h1 align="center">Registration Form</h1>
-  <br/>
-  
-  <form:form action="register" method="post" modelAttribute="users">
-<table >
-    <tr>
-    	<td><form:input path="userId" type="hidden" /></td>
-    </tr>
-     <tr>
-    	<td>Manager Name</td>
-    	<td><form:input path="managerName"  cssClass="formInput" placeholder="Enter Manager Name"/></td>
-    	<td><form:errors path="managerName"  cssClass="formError"/></td>
-    </tr>
-     <tr>
-    	<td>Email Id:</td>
-    	<td><form:input path="emailId"  cssClass="formInput" placeholder="Enter Email"/></td>
-    	<td><form:errors path="emailId"  cssClass="formError"/></td>
-    </tr>
-    <tr>
-    	<td>Password</td>
-    	<td><form:password path="password"  cssClass="formInput" placeholder="Enter password"/></td>
-    	<td><form:errors path="password"  cssClass="formError"/></td>
-    </tr>
-    <tr>
-    	<td>Address</td>
-    	<td><form:input path="Address"  cssClass="formInput" placeholder="Enter Address"/></td>
-    </tr>
-    <tr>
-    	<td>Contact Number</td>
-    	<td><form:input path="contactNumber"  cssClass="formInput" placeholder="Enter Contact Number"/></td>
-    	<td><form:errors path="contactNumber"  cssClass="formError"/></td>
-    </tr>
-    <tr>
-    	<td>Gender</td>
-    	<td><form:select path="gender"  cssClass="formInput">
-    	<form:option value="Male">Male</form:option>
-    	<form:option value="Female">Female</form:option>
-    	</form:select></td>
-    </tr>
-  <%--   <tr>
+	<div class="container">
+		<h1 align="center">Registration Form</h1>
+		<br />
+
+		<form:form action="register" method="post" modelAttribute="users">
+			<table>
+				<tr>
+					<td><form:input path="userId" type="hidden" /></td>
+				</tr>
+				<tr>
+					<td>Manager Name</td>
+					<td><form:input path="managerName" cssClass="formInput"
+							placeholder="Enter Manager Name" /></td>
+					<td><form:errors path="managerName" cssClass="formError" /></td>
+				</tr>
+				<tr>
+					<td>Email Id:</td>
+					<td><form:input path="emailId" cssClass="formInput"
+							placeholder="Enter Email" /></td>
+					<td><form:errors path="emailId" cssClass="formError" /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><form:password path="password" cssClass="formInput"
+							placeholder="Enter password" /></td>
+					<td><form:errors path="password" cssClass="formError" /></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><form:input path="Address" cssClass="formInput"
+							placeholder="Enter Address" /></td>
+				</tr>
+				<tr>
+					<td>Contact Number</td>
+					<td><form:input path="contactNumber" cssClass="formInput"
+							placeholder="Enter Contact Number" /></td>
+					<td><form:errors path="contactNumber" cssClass="formError" /></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td><form:select path="gender" cssClass="formInput">
+							<form:option value="Male">Male</form:option>
+							<form:option value="Female">Female</form:option>
+						</form:select></td>
+				</tr>
+				<%--   <tr>
     	<td>Role:</td>
     	<td><form:select path="role"  cssClass="formInput" >
     		<form:option value="employee" label="Employee" />
@@ -68,15 +76,16 @@
     	<td>
     </td>
     </tr> --%>
-    <tr><td align="right"><input type="submit" value="Submit"/></td><td align="left">
-    <input type="reset" value="Reset"/></td>
-    <a href="/login">Login</a> 
-    </tr>
-    <!-- <a href="/login">Login</a> -->
-    </table>
- </form:form>
- 
-<%-- <form:form action="${pageContext.request.contextPath}/physician/savePhysician" method="post" commandName="physician">
+				<tr>
+					<td align="right"><input type="submit" value="Submit" /></td>
+					<td align="left"><input type="reset" value="Reset" /></td>
+					<a href="/login">Login</a>
+				</tr>
+				<!-- <a href="/login">Login</a> -->
+			</table>
+		</form:form>
+
+		<%-- <form:form action="${pageContext.request.contextPath}/physician/savePhysician" method="post" commandName="physician">
 
 
     <div class="form-group">
@@ -116,6 +125,6 @@
  <button type="reset" class="btn btn-default">Reset</button>
     
   </form:form><br/> --%>
-</div>
+	</div>
 </body>
 </html>

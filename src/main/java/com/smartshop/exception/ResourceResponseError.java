@@ -1,7 +1,7 @@
 package com.smartshop.exception;
 
 public class ResourceResponseError {
-	
+
 	private int status;
 	private String message;
 	private long timeStamp;

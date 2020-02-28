@@ -16,11 +16,16 @@ import com.smartshop.entity.Roles;
 import com.smartshop.entity.Users;
 import com.smartshop.service.UserService;
 
+/**
+ * @author Abdul
+ *
+ */
+
 @RestController
 public class UserController {
 
 	private static final Logger logger = LogManager.getLogger(UserController.class);
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -28,17 +33,19 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping("/registration")
-	public ModelAndView showUserRegisterForm(){
-		
+	public ModelAndView showUserRegisterForm() {
+
 		logger.info("In Show Registration Method");
-		return new ModelAndView("registration-page","users",new Users());
+		return new ModelAndView("registration-page", "users", new Users());
 	}
+
 	@PostMapping("register")
-	public ModelAndView saveUserRegistrationForm(@Validated @ModelAttribute("users") Users users,BindingResult result){
+	public ModelAndView saveUserRegistrationForm(@Validated @ModelAttribute("users") Users users,
+			BindingResult result) {
 
 		logger.info("In Save Registration Method");
 
-		if(result.hasErrors()){
+		if (result.hasErrors()) {
 			logger.error("Validation Error Occured in Save Registration Method ");
 			return new ModelAndView("registration-page");
 		}
@@ -47,7 +54,7 @@ public class UserController {
 		Roles role = new Roles("user");
 		users.setRole(role);
 		userService.saveUser(users);
-		role=null;
+		role = null;
 		return new ModelAndView("redirect:/login");
 	}
 }

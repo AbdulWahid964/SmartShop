@@ -11,13 +11,13 @@
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Product Details</title>
 </head>
 <body>
 	<center>
 		<h1>Product Details Form</h1>
 
-		<form:form action="/product" method="post" modelAttribute="products">
+		<form:form action="/product" method="post" modelAttribute="product">
 			<table>
 				<tr>
 					<td><form:input path="productId" type="hidden" /></td>
@@ -45,11 +45,11 @@
 				</tr>
 				<tr>
 					<td colspan="2"><c:if test="${!empty products.productName}">
-							<input type="submit" value="EditProduct" />
+							<input type="submit" value="Update Product" />
 						</c:if> <c:if test="${empty products.productName}">
-							<input type="submit" value="AddProduct" />
+							<input type="submit" value="Save" />
 						</c:if></td>
-					<td><input type=button value="Back" onCLick="history.back()">
+					<td><input type=button value="Back" onClick="history.back()">
 					</td>
 				</tr>
 				<!-- <a href="/login">Login</a> -->
