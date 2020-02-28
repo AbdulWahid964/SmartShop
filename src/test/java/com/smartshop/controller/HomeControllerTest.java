@@ -13,11 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.ui.Model;
+
+import com.smartshop.service.ProductService;
 
 /**
  * @author mahendra sukula
@@ -40,7 +43,9 @@ public class HomeControllerTest {
 	@SuppressWarnings("rawtypes")
 	@Mock
 	private List list;
-	private Field field;
+	private Field field, field1;
+	@Mock
+	ProductService productservice;
 	
 	
 	@Before
@@ -48,6 +53,9 @@ public class HomeControllerTest {
 		field = SecurityContextHolder.class.getDeclaredField("strategy");
 		field.setAccessible(true);
 		field.set(SecurityContextHolder.class, strategy);
+		field1 = HomeController.class.getDeclaredField("productservice");
+		field1.setAccessible(true);
+		field1.set(homeController, productservice);
 	}
 
 	@SuppressWarnings("unchecked")
