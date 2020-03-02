@@ -24,7 +24,7 @@ import com.smartshop.exception.DatabaseAuthenticationException;
 /*Author Abdul Wahid*/
 
 @Configuration
-@ComponentScan(basePackages = { "com.smartshop.controller", "com.smartshop.service" })
+@ComponentScan(basePackages = { "com.smartshop.controller", "com.smartshop.service","com.smartshop.exception" })
 @EnableJpaRepositories(basePackages = "com.smartshop.dao")
 @EntityScan(basePackages = "com.smartshop.entity")
 @EnableWebSecurity

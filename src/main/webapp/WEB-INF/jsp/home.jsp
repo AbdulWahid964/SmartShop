@@ -58,7 +58,6 @@
 				<th width="80">Product Name</th>
 				<th width="80">Price</th>
 				<th width="80">Quantity</th>
-				<th width="80">Product Date</th>
 				<th width="80">Description</th>
 				<th width="80">Edit</th>
 				<th width="80">Delete</th>
@@ -73,7 +72,6 @@
 					<td>${product.productName}</td>
 					<td>${product.productPrice}</td>
 					<td>${product.quantity}</td>
-					<td>${product.productDate}</td>
 					<td>${product.description}</td>
 					<td><a href="<c:url value='/product/${product.productId}' />">Edit</a></td>
 					<td><a  href="<c:url value='/products/product/${product.productId}'/>">Delete</a></td>
@@ -82,6 +80,8 @@
 		</table>
 		<br />
 		<a href="/product">Add Product</a>
+		<br/>
+		<a href="/stock">Add Stock</a>
 	</c:if>
 	<div>
 		<c:if test="${role eq '[user]'}">

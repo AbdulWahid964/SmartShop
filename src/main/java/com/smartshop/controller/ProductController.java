@@ -1,6 +1,5 @@
 package com.smartshop.controller;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,31 +37,31 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 
-	@GetMapping(value = "/product")
+	@RequestMapping(value = "/product")
 	public ModelAndView addProduct(@ModelAttribute("product") Product products) {
 
 		logger.info("In addProduct method");
 
-		return new ModelAndView("save-product");
+		return new ModelAndView("product");
 	}
 
 	@PostMapping(value = "/product")
 	public ModelAndView saveProduct(@Validated @ModelAttribute("product") Product product, BindingResult result) {
 
 		logger.info("In saveProduct method");
-
+		
 		if (result.hasErrors()) {
 
 			logger.info("Validation Error");
 
-			return new ModelAndView("save-product");
+			return new ModelAndView("product");
 
 		}
 		productService.saveProduct(product);
 		return new ModelAndView("redirect:/home");
 	}
 
-	@GetMapping(value = "/remove/{productId}")
+	@GetMapping(value = "/products/product/{productId}")
 	public ModelAndView deleteProduct(@PathVariable("productId") int productId, Model model) {
 
 		try {
@@ -79,7 +79,7 @@ public class ProductController {
 		}
 	}
 
-	@GetMapping("/edit/{productId}")
+	@GetMapping("/product/{productId}")
 	public ModelAndView editProduct(@PathVariable("productId") int productId) {
 
 		logger.info("In editProduct method");
@@ -91,12 +91,11 @@ public class ProductController {
 
 			throw new ResourceNotFoundException("Product Not Found Exception");
 		}
-		return new ModelAndView("save-product", "product", product);
+		return new ModelAndView("product", "product", product);
 	}
 
-	@GetMapping("/search")
-	public ModelAndView searchProductName(@RequestParam("productname") String productName, Model model)
-			throws ParseException {
+	@GetMapping("/products")
+	public ModelAndView searchProductName(@RequestParam("productname") String productName, Model model){
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toString();

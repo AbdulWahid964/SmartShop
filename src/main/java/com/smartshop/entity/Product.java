@@ -22,7 +22,7 @@ public class Product {
 	private int productPrice;
 
 	private int quantity;
-
+	
 	private String description;
 
 	public int getProductId() {
@@ -64,5 +64,4 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 }

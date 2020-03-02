@@ -106,7 +106,6 @@ public class ProductControllerTest {
 	public void testEditProduct_Exception() {
 		productController.editProduct(1);
 	}
-
 	@Test
 	public void testSearchProductName() throws ParseException {
 		Mockito.when(strategy.getContext()).thenReturn(securityContext);
@@ -115,8 +114,6 @@ public class ProductControllerTest {
 		Mockito.when(list.toString()).thenReturn("user");
 		assertEquals("home", productController.searchProductName("productName", model).getViewName());
 	}
-	
-
 	@After
 	public void tearDown() throws Exception {
 		auth = null;
