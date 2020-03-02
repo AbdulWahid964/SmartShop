@@ -37,7 +37,7 @@
 
 	<h2>Product Details</h2>
 
-	<form action="search">
+	<form action="products">
 		Product Name:<input id="productname" name="productname"
 			class="form-control" value="${product.productName}"
 			placeholder="Enter Product Name" /> <input type="submit"
@@ -58,6 +58,7 @@
 				<th width="80">Product Name</th>
 				<th width="80">Price</th>
 				<th width="80">Quantity</th>
+				<th width="80">Product Date</th>
 				<th width="80">Description</th>
 				<th width="80">Edit</th>
 				<th width="80">Delete</th>
@@ -72,9 +73,10 @@
 					<td>${product.productName}</td>
 					<td>${product.productPrice}</td>
 					<td>${product.quantity}</td>
+					<td>${product.productDate}</td>
 					<td>${product.description}</td>
-					<td><a href="<c:url value='/edit/${product.productId}' />">Edit</a></td>
-					<td><a href="<c:url value='/remove/${product.productId}'/>">Delete</a></td>
+					<td><a href="<c:url value='/product/${product.productId}' />">Edit</a></td>
+					<td><a  href="<c:url value='/products/product/${product.productId}'/>">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

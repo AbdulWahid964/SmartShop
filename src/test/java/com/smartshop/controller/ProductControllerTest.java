@@ -72,7 +72,7 @@ public class ProductControllerTest {
 
 	@Test
 	public void testAddProduct() {
-		assertEquals("save-product", productController.addProduct(products).getViewName());
+		assertEquals("product", productController.addProduct(products).getViewName());
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class ProductControllerTest {
 	public void testSaveProduct_hasErrors() {
 		Mockito.when(productDao.findOne(Matchers.anyInt())).thenReturn(products);
 		Mockito.when(result.hasErrors()).thenReturn(true);
-		assertEquals("save-product", productController.saveProduct(products, result).getViewName());
+		assertEquals("product", productController.saveProduct(products, result).getViewName());
 	}
 
 	@Test
@@ -100,7 +100,7 @@ public class ProductControllerTest {
 	@Test
 	public void testEditProduct() {
 		Mockito.when(productDao.findOne(Matchers.anyInt())).thenReturn(products);
-		assertEquals("save-product", productController.editProduct(1).getViewName());
+		assertEquals("product", productController.editProduct(1).getViewName());
 	}
 	@Test(expected=ResourceNotFoundException.class)
 	public void testEditProduct_Exception() {
