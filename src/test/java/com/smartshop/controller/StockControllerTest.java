@@ -61,4 +61,15 @@ public class StockControllerTest {
 		model = null;
 		stockService = null;
 	}
+
+	@Test
+	public void testEditStockException() throws Exception {
+		Stock stock = stockService.editStock(100);
+		int status = 404;
+		String content = "Stock Id is not Found";
+		if (stock == null) {
+			assertEquals(404, status);
+			assertEquals(content, "Stock Id is not Found");
+		}
+	}
 }

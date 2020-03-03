@@ -22,22 +22,30 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.smartshop.dao.ProductDao;
+import com.smartshop.dao.StockDAO;
 import com.smartshop.entity.Product;
+import com.smartshop.entity.Stock;
 import com.smartshop.exception.ProductIdNotFoundException;
 import com.smartshop.exception.ResourceNotFoundException;
 import com.smartshop.service.ProductService;
 import com.smartshop.service.ProductServiceImpl;
+import com.smartshop.service.StockService;
+import com.smartshop.service.StockServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductControllerTest {
-	
+
 	ProductController productController;
+	StockController stockController;
 	private Product products;
+	private Stock stock;
 	@Mock
 	private BindingResult result;
 	@Mock
 	ProductDao productDao;
+	StockDAO stockDao;
 	ProductService productService;
+	StockService stockService;
 	Field field, field1, field2;
 	@Mock
 	private Model model;
@@ -50,12 +58,14 @@ public class ProductControllerTest {
 	@SuppressWarnings("rawtypes")
 	@Mock
 	private List list;
-	
 
 	@Before
 	public void setUp() throws Exception {
 		productController = new ProductController();
 		productService = new ProductServiceImpl();
+		
+		stockController = new StockController();
+		stockService = new StockServiceImpl();
 		field = ProductController.class.getDeclaredField("productService");
 		field.setAccessible(true);
 		field.set(productController, productService);
@@ -67,9 +77,11 @@ public class ProductControllerTest {
 		field2.set(SecurityContextHolder.class, strategy);
 		products = new Product();
 		products.setProductId(1);
+		products.setProductName("Test");
+		products.setDescription("Test");
+		products.setProductPrice(100);
+		products.setQuantity(100);
 	}
-
-
 	@Test
 	public void testAddProduct() {
 		assertEquals("product", productController.addProduct(products).getViewName());
@@ -80,6 +92,7 @@ public class ProductControllerTest {
 		Mockito.when(productDao.findOne(Matchers.anyInt())).thenReturn(products);
 		assertEquals("redirect:/home", productController.saveProduct(products, result).getViewName());
 	}
+
 	@Test
 	public void testSaveProduct_hasErrors() {
 		Mockito.when(productDao.findOne(Matchers.anyInt())).thenReturn(products);
@@ -91,21 +104,26 @@ public class ProductControllerTest {
 	public void testDeleteProduct() {
 		assertEquals("redirect:/home", productController.deleteProduct(1, model).getViewName());
 	}
-	@Test(expected=ProductIdNotFoundException.class)
+
+	@Test(expected = ProductIdNotFoundException.class)
 	public void testDeleteProduct_Exception() {
-		Mockito.doThrow(new ProductIdNotFoundException("Invalid Product Id")).when(productDao).delete(Matchers.anyInt());
+		Mockito.doThrow(new ProductIdNotFoundException("Invalid Product Id")).when(productDao)
+				.delete(Matchers.anyInt());
 		productController.deleteProduct(1, model);
 	}
+	
 
 	@Test
 	public void testEditProduct() {
 		Mockito.when(productDao.findOne(Matchers.anyInt())).thenReturn(products);
 		assertEquals("product", productController.editProduct(1).getViewName());
 	}
-	@Test(expected=ResourceNotFoundException.class)
+
+	@Test(expected = ResourceNotFoundException.class)
 	public void testEditProduct_Exception() {
 		productController.editProduct(1);
 	}
+
 	@Test
 	public void testSearchProductName() throws ParseException {
 		Mockito.when(strategy.getContext()).thenReturn(securityContext);
@@ -113,6 +131,16 @@ public class ProductControllerTest {
 		Mockito.when(auth.getAuthorities()).thenReturn(list);
 		Mockito.when(list.toString()).thenReturn("user");
 		assertEquals("home", productController.searchProductName("productName", model).getViewName());
+	}
+	@Test
+	public void testEditProductException() throws Exception {
+		Product product = productService.editProduct(100);
+		int status = 404;
+		String content = "Product Not Found Exception";
+		if (product == null) {
+			assertEquals(404, status);
+			assertEquals(content, "Product Not Found Exception");
+		}
 	}
 	@After
 	public void tearDown() throws Exception {

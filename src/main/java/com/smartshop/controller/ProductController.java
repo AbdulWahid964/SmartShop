@@ -53,9 +53,7 @@ public class ProductController {
 		if (result.hasErrors()) {
 
 			logger.info("Validation Error");
-
 			return new ModelAndView("product");
-
 		}
 		productService.saveProduct(product);
 		return new ModelAndView("redirect:/home");
